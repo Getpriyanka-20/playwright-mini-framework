@@ -15,11 +15,14 @@ The framework covers:
 ## Current Progress
 
 - [x] Playwright project created
-- [x] SauceDemo smoke test added
+- [x] SauceDemo login automation added
 - [x] Chromium, Firefox, and WebKit configured
 - [x] HTML reporting configured
-- [ ] Page Object Model
-- [ ] Login test scenarios
+- [x] Login Page Object Model created
+- [x] Valid login test
+- [x] Invalid login test
+- [x] Locked-out user test
+- [x] Required-field validation tests
 - [ ] Product tests
 - [ ] Cart tests
 - [ ] Checkout tests
