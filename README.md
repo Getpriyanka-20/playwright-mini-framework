@@ -30,8 +30,23 @@ The framework covers:
 - [x] Name sorting validation
 - [x] Price sorting validation
 - [x] Product-details navigation test
-- [ ] Cart tests
-- [ ] Checkout tests
+- [x] Cart tests
+- [x] Cart Page Object Model created
+- [x] Add one product to cart
+- [x] Add multiple products to cart
+- [x] Verify cart product names and prices
+- [x] Remove product from cart
+- [x] Continue Shopping navigation
+- [x] Cart persistence after refresh
+- [x] Checkout tests
+- [x] Checkout Page Object Model created
+- [x] Checkout required-field validation
+- [x] Checkout customer-information test
+- [x] Order-overview product validation
+- [x] Subtotal, tax, and total validation
+- [x] Successful order-completion test
+- [x] Return-to-products validation
+- [x] Cancel-checkout validation
 - [ ] Restful Booker API tests
 
 ## Run Tests
