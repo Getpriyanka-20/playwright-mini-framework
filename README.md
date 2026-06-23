@@ -23,7 +23,13 @@ The framework covers:
 - [x] Invalid login test
 - [x] Locked-out user test
 - [x] Required-field validation tests
-- [ ] Product tests
+- [x] Product tests
+- [x] Products Page Object Model created
+- [x] Product-list validation
+- [x] Product name and price validation
+- [x] Name sorting validation
+- [x] Price sorting validation
+- [x] Product-details navigation test
 - [ ] Cart tests
 - [ ] Checkout tests
 - [ ] Restful Booker API tests
