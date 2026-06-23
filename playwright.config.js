@@ -37,11 +37,48 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
+ /* projects: [
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+    },*/
+
+    projects: [
+  {
+    name: 'chromium',
+    testMatch: /ui\/.*\.spec\.js/,
+    use: {
+      ...devices['Desktop Chrome'],
     },
+  },
+
+  {
+    name: 'firefox',
+    testMatch: /ui\/.*\.spec\.js/,
+    use: {
+      ...devices['Desktop Firefox'],
+    },
+  },
+
+  {
+    name: 'webkit',
+    testMatch: /ui\/.*\.spec\.js/,
+    use: {
+      ...devices['Desktop Safari'],
+    },
+  },
+
+  {
+    name: 'api',
+    testMatch: /api\/.*\.spec\.js/,
+    use: {
+      baseURL: 'https://restful-booker.herokuapp.com',
+      extraHTTPHeaders: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    },
+  },
 
   /* {
       name: 'firefox',

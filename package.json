@@ -1,3 +1,5 @@
+
+
 {
   "name": "playwright-mini-framework",
   "version": "1.0.0",
@@ -7,6 +9,7 @@
     "test:chromium": "playwright test --project=chromium",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
+    "test:api": "playwright test tests/api --project=api",
     "test:login": "playwright test tests/ui/login.spec.js",
     "report": "playwright show-report"
   },

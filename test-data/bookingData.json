@@ -1,0 +1,24 @@
+{
+  "newBooking": {
+    "firstname": "Priyanka",
+    "lastname": "Automation",
+    "totalprice": 450,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2026-08-10",
+      "checkout": "2026-08-15"
+    },
+    "additionalneeds": "Breakfast"
+  },
+  "updatedBooking": {
+    "firstname": "Priyanka",
+    "lastname": "Tester",
+    "totalprice": 525,
+    "depositpaid": false,
+    "bookingdates": {
+      "checkin": "2026-09-10",
+      "checkout": "2026-09-16"
+    },
+    "additionalneeds": "Dinner"
+  }
+}

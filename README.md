@@ -47,7 +47,15 @@ The framework covers:
 - [x] Successful order-completion test
 - [x] Return-to-products validation
 - [x] Cancel-checkout validation
-- [ ] Restful Booker API tests
+- [x] Restful Booker API tests
+- [x] Restful Booker API project configured
+- [x] Retrieve booking IDs
+- [x] Create and retrieve booking
+- [x] Complete booking update using PUT
+- [x] Partial booking update using PATCH
+- [x] Authentication validation
+- [x] Delete booking and verify deletion
+- [x] Negative API scenarios
 
 ## Run Tests
 
