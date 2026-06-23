@@ -6,9 +6,10 @@ class ProductsPage {
     this.inventoryItems = page.locator('[data-test="inventory-item"]');
     this.productNames = page.locator('[data-test="inventory-item-name"]');
     this.productPrices = page.locator('[data-test="inventory-item-price"]');
-    this.sortDropdown = page.locator(
-      '[data-test="product-sort-container"]'
-    );
+    this.sortDropdown = page.locator('[data-test="product-sort-container"]');
+
+    this.cartLink = page.locator('[data-test="shopping-cart-link"]');
+    this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
   }
 
   getProductCard(productName) {
@@ -46,6 +47,25 @@ class ProductsPage {
       .getByText(productName, { exact: true })
       .click();
   }
+  async addProductToCart(productName) {
+  const productCard = this.getProductCard(productName);
+
+  await productCard
+    .getByRole('button', { name: 'Add to cart' })
+    .click();
+}
+
+async removeProductFromProductsPage(productName) {
+  const productCard = this.getProductCard(productName);
+
+  await productCard
+    .getByRole('button', { name: 'Remove' })
+    .click();
+}
+
+async openCart() {
+  await this.cartLink.click();
+}
 }
 
 module.exports = { ProductsPage };
