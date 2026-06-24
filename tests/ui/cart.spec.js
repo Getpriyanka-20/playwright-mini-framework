@@ -1,18 +1,19 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../pages/LoginPage.js');
-const { ProductsPage } = require('../../pages/ProductsPage.js');
-const { CartPage } = require('../../pages/CartPage.js');
+//const { test, expect } = require('@playwright/test');
+//const { LoginPage } = require('../../pages/LoginPage.js');
+//const { ProductsPage } = require('../../pages/ProductsPage.js');
+//const { CartPage } = require('../../pages/CartPage.js');
+const { test, expect } = require('../../fixtures/baseTest.js');
 const users = require('../../test-data/users.json');
 
 test.describe('SauceDemo Shopping Cart Tests', () => {
-  let loginPage;
-  let productsPage;
-  let cartPage;
+  //let loginPage;
+  //let productsPage;
+  //let cartPage;
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    productsPage = new ProductsPage(page);
-    cartPage = new CartPage(page);
+  test.beforeEach(async ({ page, loginPage }) => {
+    //loginPage = new LoginPage(page);
+    //productsPage = new ProductsPage(page);
+    //cartPage = new CartPage(page);
 
     await loginPage.navigateToLoginPage();
 
@@ -24,7 +25,7 @@ test.describe('SauceDemo Shopping Cart Tests', () => {
     await expect(page).toHaveURL(/inventory\.html/);
   });
 
-  test('should add one product to the cart', async ({ page }) => {
+  test('should add one product to the cart', async ({ page ,productsPage, cartPage}) => {
     const productName = 'Sauce Labs Backpack';
 
     await productsPage.addProductToCart(productName);
@@ -38,7 +39,7 @@ test.describe('SauceDemo Shopping Cart Tests', () => {
     await expect(cartPage.getCartItem(productName)).toBeVisible();
   });
 
-  test('should add two products and display correct prices', async () => {
+  test('should add two products and display correct prices', async ({productsPage, cartPage}) => {
     const firstProduct = 'Sauce Labs Backpack';
     const secondProduct = 'Sauce Labs Bike Light';
 
@@ -68,7 +69,7 @@ test.describe('SauceDemo Shopping Cart Tests', () => {
     ).toHaveText('$9.99');
   });
 
-  test('should remove a product from the cart', async () => {
+  test('should remove a product from the cart', async ({ productsPage, cartPage }) => {
     const productName = 'Sauce Labs Backpack';
 
     await productsPage.addProductToCart(productName);
@@ -83,7 +84,7 @@ test.describe('SauceDemo Shopping Cart Tests', () => {
   });
 
   test('should return to the products page using Continue Shopping', async ({
-    page,
+    page, productsPage, cartPage
   }) => {
     await productsPage.openCart();
 
@@ -95,7 +96,7 @@ test.describe('SauceDemo Shopping Cart Tests', () => {
     await expect(productsPage.pageTitle).toHaveText('Products');
   });
 
-  test('should retain the cart item after page refresh', async ({ page }) => {
+  test('should retain the cart item after page refresh', async ({ page, productsPage, cartPage }) => {
     const productName = 'Sauce Labs Backpack';
 
     await productsPage.addProductToCart(productName);

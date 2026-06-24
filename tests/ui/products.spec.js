@@ -1,17 +1,18 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../pages/LoginPage.js');
-const { ProductsPage } = require('../../pages/ProductsPage.js');
+//const { test, expect } = require('@playwright/test');
+//const { LoginPage } = require('../../pages/LoginPage.js');
+//const { ProductsPage } = require('../../pages/ProductsPage.js');
+const { test, expect } = require('../../fixtures/baseTest.js');
 const users = require('../../test-data/users.json');
 
 test.describe('SauceDemo Products Tests', () => {
-  let loginPage;
-  let productsPage;
+  //let loginPage;
+  //let productsPage;
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    productsPage = new ProductsPage(page);
+  test.beforeEach(async ({ page, loginPage }) => {
+    //loginPage = new LoginPage(page);
+    //productsPage = new ProductsPage(page);
 
-    await loginPage.navigateToLoginPage();
+    await loginPage.navigateToLoginPage()
 
     await loginPage.login(
       users.validUser.username,
@@ -21,12 +22,12 @@ test.describe('SauceDemo Products Tests', () => {
     await expect(page).toHaveURL(/inventory\.html/);
   });
 
-  test('should display the products page and all products', async () => {
+  test('should display the products page and all products', async ({ productsPage }) => {
     await expect(productsPage.pageTitle).toHaveText('Products');
     await expect(productsPage.inventoryItems).toHaveCount(6);
   });
 
-  test('should display the correct product name and price', async () => {
+  test('should display the correct product name and price', async ({ productsPage }) => {
     const productName = 'Sauce Labs Backpack';
 
     const productCard = productsPage.getProductCard(productName);
@@ -38,7 +39,7 @@ test.describe('SauceDemo Products Tests', () => {
     ).toHaveText('$29.99');
   });
 
-  test('should sort products by name from Z to A', async () => {
+  test('should sort products by name from Z to A', async ({ productsPage }) => {
     await productsPage.sortProductsBy('za');
 
     const actualNames = await productsPage.getAllProductNames();
@@ -50,7 +51,7 @@ test.describe('SauceDemo Products Tests', () => {
     expect(actualNames).toEqual(expectedNames);
   });
 
-  test('should sort products by price from low to high', async () => {
+  test('should sort products by price from low to high', async ({ productsPage }) => {
     await productsPage.sortProductsBy('lohi');
 
     const actualPrices = await productsPage.getAllProductPrices();
@@ -62,7 +63,7 @@ test.describe('SauceDemo Products Tests', () => {
     expect(actualPrices).toEqual(expectedPrices);
   });
 
-  test('should open the selected product details page', async ({ page }) => {
+  test('should open the selected product details page', async ({ page, productsPage }) => {
     const productName = 'Sauce Labs Backpack';
 
     await productsPage.openProductDetails(productName);

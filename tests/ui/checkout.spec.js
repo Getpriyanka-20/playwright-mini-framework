@@ -1,26 +1,27 @@
-const { test, expect } = require('@playwright/test');
-const { LoginPage } = require('../../pages/LoginPage.js');
-const { ProductsPage } = require('../../pages/ProductsPage.js');
-const { CartPage } = require('../../pages/CartPage.js');
-const { CheckoutPage } = require('../../pages/CheckoutPage.js');
+//const { test, expect } = require('@playwright/test');
+//const { LoginPage } = require('../../pages/LoginPage.js');
+//const { ProductsPage } = require('../../pages/ProductsPage.js');
+//const { CartPage } = require('../../pages/CartPage.js');
+//const { CheckoutPage } = require('../../pages/CheckoutPage.js');
+const { test, expect } = require('../../fixtures/baseTest.js');
 
 const users = require('../../test-data/users.json');
 const checkoutData = require('../../test-data/checkoutData.json');
 
 test.describe('SauceDemo Checkout Tests', () => {
-  let loginPage;
-  let productsPage;
-  let cartPage;
-  let checkoutPage;
+  //let loginPage;
+  //let productsPage;
+  //let cartPage;
+  //let checkoutPage;
 
   const firstProduct = 'Sauce Labs Backpack';
   const secondProduct = 'Sauce Labs Bike Light';
 
-  test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
-    productsPage = new ProductsPage(page);
-    cartPage = new CartPage(page);
-    checkoutPage = new CheckoutPage(page);
+  test.beforeEach(async ({page ,loginPage, productsPage, cartPage}) => {
+    //loginPage = new LoginPage(page);
+    //productsPage = new ProductsPage(page)
+    //cartPage = new CartPage(page);
+    //checkoutPage = new CheckoutPage(page);
 
     await loginPage.navigateToLoginPage();
 
@@ -43,7 +44,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     await expect(page).toHaveURL(/checkout-step-one\.html/);
   });
 
-  test('should display the checkout information page', async () => {
+  test('should display the checkout information page', async ({checkoutPage}) => {
     await expect(checkoutPage.pageTitle).toHaveText(
       'Checkout: Your Information'
     );
@@ -54,7 +55,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     await expect(checkoutPage.continueButton).toBeVisible();
   });
 
-  test('should require the first name', async () => {
+  test('should require the first name', async ({checkoutPage}) => {
     await checkoutPage.continueCheckout();
 
     await expect(checkoutPage.errorMessage).toHaveText(
@@ -62,7 +63,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     );
   });
 
-  test('should require the last name', async () => {
+  test('should require the last name', async ({checkoutPage}) => {
     await checkoutPage.enterFirstName(
       checkoutData.validCustomer.firstName
     );
@@ -74,7 +75,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     );
   });
 
-  test('should require the postal code', async () => {
+  test('should require the postal code', async ({checkoutPage}) => {
     await checkoutPage.enterFirstName(
       checkoutData.validCustomer.firstName
     );
@@ -90,9 +91,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     );
   });
 
-  test('should display selected products in the order overview', async ({
-    page,
-  }) => {
+  test('should display selected products in the order overview', async ({page, checkoutPage}) => {
     await checkoutPage.fillCheckoutInformation(
       checkoutData.validCustomer
     );
@@ -116,7 +115,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     await expect(checkoutPage.overviewItems).toHaveCount(2);
   });
 
-  test('should display the correct subtotal, tax, and total', async () => {
+  test('should display the correct subtotal, tax, and total', async ({checkoutPage}) => {
     await checkoutPage.fillCheckoutInformation(
       checkoutData.validCustomer
     );
@@ -132,7 +131,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     expect(total).toBeCloseTo(subtotal + tax, 2);
   });
 
-  test('should complete an order successfully', async ({ page }) => {
+  test('should complete an order successfully', async ({page, checkoutPage, productsPage}) => {
     await checkoutPage.fillCheckoutInformation(
       checkoutData.validCustomer
     );
@@ -154,9 +153,7 @@ test.describe('SauceDemo Checkout Tests', () => {
     await expect(productsPage.cartBadge).toHaveCount(0);
   });
 
-  test('should return to Products after completing an order', async ({
-    page,
-  }) => {
+  test('should return to Products after completing an order', async ({ page, checkoutPage, productsPage}) => {
     await checkoutPage.fillCheckoutInformation(
       checkoutData.validCustomer
     );
@@ -170,7 +167,7 @@ test.describe('SauceDemo Checkout Tests', () => {
   });
 
   test('should return to the cart when checkout is cancelled', async ({
-    page,
+    page, checkoutPage, cartPage
   }) => {
     await checkoutPage.cancelCheckout();
 
