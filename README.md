@@ -1,4 +1,5 @@
 # Playwright Mini Automation Framework
+[![Playwright Tests](https://github.com/Getpriyanka-20/playwright-mini-framework/actions/workflows/playwright.yml/badge.svg)](https://github.com/Getpriyanka-20/playwright-mini-framework/actions/workflows/playwright.yml)
 
 A portfolio automation project built using Playwright and JavaScript.
 
